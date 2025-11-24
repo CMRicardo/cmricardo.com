@@ -1,0 +1,15 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  isActive?: boolean;
+}
+const { href, label, isActive = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded px-2 py-1 transition-colors ${isActive ? "bg-primary/20" : "hover:bg-primary/10"}`}
+>
+  {label}
+</a>
