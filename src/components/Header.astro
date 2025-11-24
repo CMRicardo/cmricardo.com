@@ -1,31 +1,26 @@
 ---
 import { WEBSITE_TITLE } from "../constants";
+import NavLink from "./NavLink.astro";
 
 const currentPath = Astro.url.pathname;
 
-const isActive = (path: string) =>
-  currentPath === path ? "bg-primary/20" : "hover:bg-primary/10";
+const isActive = (path: string): boolean => currentPath === path;
 ---
 
 <header class="flex items-center justify-between gap-2 py-4 md:pt-32 pt-16">
-  <h1 class="text-primary text-xl">{WEBSITE_TITLE}</h1>
+  <a
+    href="/"
+    class="px-2 py-1 focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded"
+  >
+    <h1 class="text-primary text-xl">{WEBSITE_TITLE}</h1>
+  </a>
   <nav>
     <ul class="flex">
       <li>
-        <a
-          href="/"
-          class={`focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded px-2 py-1 transition-colors ${isActive("/")}`}
-        >
-          Home
-        </a>
+        <NavLink href="/" label="Home" isActive={isActive("/")} />
       </li>
       <li>
-        <a
-          href="/blog"
-          class={`focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded px-2 py-1 transition-colors ${isActive("/blog")}`}
-        >
-          Blog
-        </a>
+        <NavLink href="/blog" label="Blog" isActive={isActive("/blog")} />
       </li>
     </ul>
   </nav>
