@@ -1,5 +1,7 @@
 ---
+import Header from "../components/Header.astro";
 import "../styles/global.css";
+import { WEBSITE_TITLE } from "../constants.ts";
 ---
 
 <!doctype html>
@@ -9,9 +11,12 @@ import "../styles/global.css";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>CMRicardo</title>
+		<title>{WEBSITE_TITLE}</title>
 	</head>
-	<body>
-		<slot />
+	<body class="max-w-3xl mx-auto px-4 text-foreground">
+		<Header />
+		<main class="mt-10">
+			<slot />
+		</main>
 	</body>
 </html>
