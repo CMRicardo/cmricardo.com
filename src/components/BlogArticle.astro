@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, summary, date, author, tags = [] } = post.frontmatter;
+const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
 ---
 
 <article
@@ -21,12 +21,19 @@ const { title, summary, date, author, tags = [] } = post.frontmatter;
     <p class="mt-2 text-sm text-foreground/70">
       {date} &mdash; {author}
     </p>
+    {
+      imageUrl && (
+        <img
+          src={imageUrl}
+          alt={`${title}`}
+          class="mt-4 w-full max-h-96 aspect-video rounded-md"
+        />
+      )
+    }
     <div class="mt-2 flex gap-2">
       {
         tags.map((tag) => (
-          <span class="rounded-full bg-primary/20 px-2 py-1 text-xs">
-            {tag}
-          </span>
+          <span class="rounded-full px-2 py-1 text-xs">{tag}</span>
         ))
       }
     </div>
