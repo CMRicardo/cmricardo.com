@@ -1,4 +1,6 @@
 ---
+import Header from "../components/Header.astro";
+import { WEBSITE_TITLE } from "../constants";
 import "../styles/global.css";
 const { frontmatter } = Astro.props;
 ---
@@ -10,11 +12,19 @@ const { frontmatter } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{frontmatter.title} | Blog | CMRicardo</title>
+    <title>{frontmatter.title} | Blog | {WEBSITE_TITLE}</title>
   </head>
-  <body>
-    <h1>{frontmatter.title} by {frontmatter.author}</h1>
+  <body class="max-w-3xl mx-auto px-4 text-foreground">
+    <Header />
+    <main class="my-10">
+      <h2 class="text-2xl font-bold tracking-tight">
+        {frontmatter.title}
+      </h2>
+      <span class="text-sm text-foreground/70">
+        <span>{frontmatter.date}</span> -
+        <span>{frontmatter.author}</span>
+      </span>
+    </main>
     <slot />
-    <p>{frontmatter.date}</p>
   </body>
 </html>
