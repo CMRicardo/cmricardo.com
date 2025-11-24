@@ -6,7 +6,6 @@ import { WEBSITE_TITLE } from "../constants";
 import "../styles/global.css";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
 
-// Get a list of post from /src/pages/blog/
 const posts = Object.values(
   import.meta.glob<MarkdownInstance<PostFrontmatter>>("../pages/blog/*.md", {
     eager: true,
