@@ -1,0 +1,30 @@
+---
+import { WEBSITE_TITLE } from "../constants";
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (path: string) =>
+  currentPath === path ? "bg-primary/20" : "hover:bg-primary/10";
+---
+
+<header class="flex items-center justify-between gap-2 py-4 pt-32">
+  <h1 class="text-primary text-xl">{WEBSITE_TITLE}</h1>
+  <nav>
+    <ul class="flex">
+      <li>
+        <a
+          href="/"
+          class={`focus-within:outline focus-visible:bg-gray-100/10 rounded px-2 py-1 transition-colors ${isActive("/")}`}
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          href="/blog"
+          class={`focus-within:outline focus-visible:bg-gray-100/10 rounded px-2 py-1 transition-colors ${isActive("/blog")}`}
+          >Blog</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>
