@@ -4,4 +4,5 @@ export interface PostFrontmatter {
   date: string;
   author: string;
   tags: string[];
+  imageUrl?: string;
 }
