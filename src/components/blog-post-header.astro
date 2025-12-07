@@ -1,0 +1,14 @@
+---
+import type { PostFrontmatter } from "../interfaces/post-frontmatter";
+const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
+---
+
+<header>
+  <h2 class="text-2xl font-bold tracking-tight">
+    {frontmatter.title}
+  </h2>
+  <span class="text-sm text-foreground/70">
+    <span>{frontmatter.date}</span> -
+    <span>{frontmatter.author}</span>
+  </span>
+</header>
