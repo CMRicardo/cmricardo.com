@@ -7,23 +7,15 @@
 }
 
 :root {
-  --background: #121212;
-  --foreground: #e0e0e0;
-  --primary: oklch(70.4% 0.195 277.366);
-
-
-  .dark {
-    --background: #e0e0e0;
-    --foreground: #121212;
-    --primary: oklch(70.4% 0.195 277.366);
-  }
+  --background: #fafafa;
+  --foreground: #121212;
+  --primary: oklch(54.674% 0.0296 280.61);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
-
 }
 
 @layer base {
