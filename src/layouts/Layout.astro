@@ -2,8 +2,11 @@
 import Header from "@/components/Header.astro";
 import "@/styles/global.css";
 import { WEBSITE_TITLE } from "@/constants.ts";
-
-const { title = WEBSITE_TITLE } = Astro.props;
+interface Props {
+	title?: string;
+	className?: string;
+}
+const { title = WEBSITE_TITLE, className = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,9 +18,9 @@ const { title = WEBSITE_TITLE } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="max-w-3xl mx-auto px-4 text-foreground">
+	<body class="max-w-3xl mx-auto px-4">
 		<Header />
-		<main class="mt-10">
+		<main class={`mt-10 mb-16 ${className}`}>
 			<slot />
 		</main>
 	</body>
