@@ -1,6 +1,7 @@
 ---
 import type { MarkdownInstance } from "astro";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
+import Image from "astro/components/Image.astro";
 
 interface Props {
   post: MarkdownInstance<PostFrontmatter>;
@@ -10,10 +11,11 @@ const { post } = Astro.props;
 const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
 ---
 
-<article
-  class="rounded-md p-4 hover:bg-gray-100/10 transition-colors focus-within:bg-gray-100/10 focus-within:border-none"
->
-  <a href={post.url} class="block space-y-2 focus:outline-none">
+<article>
+  <a
+    href={post.url}
+    class="block space-y-2 focus:outline-none rounded-md p-4 hover:bg-primary/10 transition-colors focus-within:bg-primary/10 focus-within:border-none"
+  >
     <h4 class="text-2xl font-semibold text-primary">{title}</h4>
     <p>
       {summary.length > 100 ? summary.slice(0, 100) + "..." : summary}
@@ -23,10 +25,12 @@ const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
     </p>
     {
       imageUrl && (
-        <img
+        <Image
           src={imageUrl}
           alt={`${title}`}
           class="mt-4 w-full max-h-96 aspect-video rounded-md"
+          width={800}
+          height={450}
         />
       )
     }
