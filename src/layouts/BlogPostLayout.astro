@@ -1,12 +1,13 @@
 ---
-import BlogPostHeader from "../components/blog-post-header.astro";
-import type { PostFrontmatter } from "../interfaces/post-frontmatter";
-import "../styles/global.css";
-import Layout from "./Layout.astro";
+import { WEBSITE_TITLE } from "@/constants";
+import BlogPostHeader from "@/components/BlogPostHeader.astro";
+import type { PostFrontmatter } from "@/interfaces/post-frontmatter";
+import "@/styles/global.css";
+import Layout from "@/layouts/Layout.astro";
 const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
 ---
 
-<Layout>
+<Layout title={`${frontmatter.title} | Blog | ${WEBSITE_TITLE}`}>
   <BlogPostHeader {frontmatter} />
   <main
     class="[&_img]:my-6 [&_img]:rounded-md [&_img]:max-h-96 [&_img]:w-full [&_img]:aspect-video"
