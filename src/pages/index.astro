@@ -1,10 +1,58 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import type { PostFrontmatter } from "@/interfaces/post-frontmatter";
+import Layout from "@/layouts/Layout.astro";
+import type { MarkdownInstance } from "astro";
+import Image from "astro/components/Image.astro";
+
+const posts = Object.values(
+	import.meta.glob<MarkdownInstance<PostFrontmatter>>("@/pages/blog/*.md", {
+		eager: true,
+	}),
+);
+const orderedPosts = posts
+	.sort(
+		(a, b) =>
+			new Date(b.frontmatter.date).getTime() -
+			new Date(a.frontmatter.date).getTime(),
+	)
+	.slice(0, 3);
 ---
 
-<Layout>
+<Layout className="grid gap-32">
 	<section class="grid gap-2">
-		<h1 class="font-bold">Today</h1>
+		<h2 class="font-bold">Today</h2>
 		<p>Software Developer at Grupo Comidas</p>
+	</section>
+	<section class="grid gap-2">
+		<h2 class="font-bold">Latest posts</h2>
+		<ol>
+			{
+				orderedPosts.map((post) => (
+					<li>
+						<a
+							href={`/blog/${post.frontmatter.slug}`}
+							class="hover:bg-primary/10 odd:max-sm:bg-primary/10 p-4 rounded-md flex flex-col-reverse sm:flex-row gap-2 justify-between items-center"
+						>
+							<section>
+								<h3>{post.frontmatter.title}</h3>
+								<p>{post.frontmatter.summary}</p>
+								<span class="text-primary/80 text-sm">
+									{post.frontmatter.date}
+								</span>
+							</section>
+							{post.frontmatter.imageUrl && (
+								<Image
+									src={post.frontmatter.imageUrl}
+									alt={post.frontmatter.title}
+									class="mt-2 rounded-md aspect-video object-cover"
+									width="200"
+									height="100"
+								/>
+							)}
+						</a>
+					</li>
+				))
+			}
+		</ol>
 	</section>
 </Layout>
