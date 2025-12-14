@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+---
+
+<footer
+  class="text-primary/80 text-center flex gap-2 items-center justify-center md:py-8 py-4 border-primary/10 border-t border-solid"
+>
+  <Image
+    src="/favicon.svg"
+    alt="CMRicardo Avatar"
+    width={32}
+    height={32}
+    loading={"lazy"}
+  />
+
+  <a
+    class="font-bold hover:underline"
+    href="https://github.com/cmricardo"
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Github profile"
+  >
+    Ricardo Corrales
+  </a>
+</footer>

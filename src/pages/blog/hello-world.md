@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/BlogPostLayout.astro
 title: "Hello, World!"
+slug: 'hello-world'
 author: "Ricardo Corrales"
 date: "23 Nov 2025"
 summary: "The beginning..."
