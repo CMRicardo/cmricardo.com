@@ -16,7 +16,7 @@ const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
     href={post.url}
     class="block space-y-2 focus:outline-none rounded-md p-4 hover:bg-primary/10 transition-colors focus-within:bg-primary/10 focus-within:border-none"
   >
-    <h4 class="text-2xl font-semibold text-primary">{title}</h4>
+    <h4 class="font-semibold text-primary">{title}</h4>
     <p>
       {summary.length > 100 ? summary.slice(0, 100) + "..." : summary}
     </p>
@@ -28,18 +28,21 @@ const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
         <Image
           src={imageUrl}
           alt={`${title}`}
-          class="mt-4 w-full max-h-96 aspect-video rounded-md"
-          width={800}
-          height={450}
+          class="mt-4 max-h-96 aspect-video rounded-md"
+          width="700"
+          height="394"
+          loading={"eager"}
         />
       )
     }
-    <div class="mt-2 flex gap-2">
-      {
-        tags.map((tag) => (
-          <span class="rounded-full px-2 py-1 text-xs">{tag}</span>
-        ))
-      }
-    </div>
+    {
+      tags && tags.length > 0 && (
+        <div class="mt-2 flex gap-2">
+          {tags.map((tag) => (
+            <span class="rounded-full px-2 py-1 text-xs">{tag}</span>
+          ))}
+        </div>
+      )
+    }
   </a>
 </article>
