@@ -18,13 +18,13 @@ const orderedPosts = posts
 	.slice(0, 3);
 ---
 
-<Layout className="grid gap-32">
-	<section class="grid gap-2">
-		<h2 class="font-bold">Today</h2>
-		<p>Software Developer at Grupo Comidas</p>
+<Layout className="flex flex-col gap-24">
+	<section class="flex flex-col gap-2">
+		<h2 class="text-2xl">Today</h2>
+		<p>Building software at Grupo Comidas</p>
 	</section>
-	<section class="grid gap-2">
-		<h2 class="font-bold">Latest posts</h2>
+	<section class="flex flex-col gap-2">
+		<h2 class="text-2xl">Latest posts</h2>
 		<ol>
 			{
 				orderedPosts.map((post) => (
@@ -34,8 +34,8 @@ const orderedPosts = posts
 							class="hover:bg-primary/10 odd:max-sm:bg-primary/10 p-4 rounded-md flex flex-col-reverse sm:flex-row gap-2 justify-between items-center"
 						>
 							<section>
-								<h3>{post.frontmatter.title}</h3>
-								<p>{post.frontmatter.summary}</p>
+								<h3 class="font-bold">{post.frontmatter.title}</h3>
+								<p class="text-primary/80">{post.frontmatter.summary}</p>
 								<span class="text-primary/80 text-sm">
 									{post.frontmatter.date}
 								</span>
