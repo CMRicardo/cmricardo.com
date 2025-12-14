@@ -1,6 +1,7 @@
 ---
 import { WEBSITE_TITLE } from "../constants";
 import NavLink from "./NavLink.astro";
+import { ModeToggle } from "./theme-selector";
 
 const currentPath = Astro.url.pathname;
 
@@ -24,4 +25,5 @@ const isActive = (path: string): boolean => currentPath === path;
       </li>
     </ul>
   </nav>
+  <ModeToggle client:load />
 </header>
