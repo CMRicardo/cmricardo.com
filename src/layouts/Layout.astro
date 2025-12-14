@@ -42,11 +42,13 @@ const { title = WEBSITE_TITLE, className = "" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="max-w-3xl mx-auto px-4 flex flex-col min-h-screen">
-		<Header />
-		<main class={`mt-10 flex-1 ${className}`}>
-			<slot />
-		</main>
-		<Footer />
+	<body class="min-h-screen">
+		<div class="max-w-3xl mx-auto px-4 flex flex-col min-h-screen">
+			<Header />
+			<main class={`mt-10 flex-1 ${className}`}>
+				<slot />
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
