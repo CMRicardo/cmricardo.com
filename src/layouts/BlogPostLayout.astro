@@ -10,7 +10,7 @@ const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
 <Layout title={`${frontmatter.title} | Blog | ${WEBSITE_TITLE}`}>
   <BlogPostHeader {frontmatter} />
   <main
-    class="[&_img]:my-6 [&_img]:rounded-md [&_img]:max-h-96 [&_img]:w-full [&_img]:aspect-video"
+    class="[&_img]:my-6 [&_img]:rounded-md [&_img]:max-h-96 [&_img]:w-full [&_img]:aspect-video [&_p]:my-4 prose prose-invert max-w-3xl mx-auto px-4 [&_pre]:rounded-md [&_pre]:p-4 py-8"
   >
     <slot />
   </main>
