@@ -8,7 +8,9 @@ const currentPath = Astro.url.pathname;
 const isActive = (path: string): boolean => currentPath === path;
 ---
 
-<header class="flex items-center justify-between gap-2 py-4 md:pt-32 pt-16">
+<header
+  class="flex items-center justify-between gap-2 py-4 md:pt-32 pt-16 sticky top-0 bg-background backdrop-blur z-10"
+>
   <a
     href="/"
     class="px-2 py-1 focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded"
