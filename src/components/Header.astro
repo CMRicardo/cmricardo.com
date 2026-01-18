@@ -1,7 +1,6 @@
 ---
 import { WEBSITE_TITLE } from "../constants";
 import NavLink from "./NavLink.astro";
-import { ModeToggle } from "./ThemeSelector";
 
 const currentPath = Astro.url.pathname;
 
@@ -9,7 +8,7 @@ const isActive = (path: string): boolean => currentPath === path;
 ---
 
 <header
-  class="flex items-center rounded-md justify-between gap-2 py-4 md:mt-32 mt-16 sticky top-0 bg-accent z-10 max-md:px-4"
+  class="flex items-center rounded-md justify-between gap-2 py-4 md:mt-32 mt-16 sticky top-0 bg-accent z-10 px-4"
 >
   <a
     href="/"
