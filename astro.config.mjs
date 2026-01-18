@@ -13,5 +13,14 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [mdx(), react()]
+  integrations: [mdx({
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      theme: 'github-dark-dimmed',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark-dimmed'
+      }
+    }
+  }), react()]
 });
