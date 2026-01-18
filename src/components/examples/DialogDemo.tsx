@@ -20,7 +20,7 @@ export const DialogDemo = () => {
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild >
-              <Button variant="outline" >
+              <Button variant={'secondary'} >
                 <Icon icon={CancelIcon} />
                 Cancel
               </Button>
