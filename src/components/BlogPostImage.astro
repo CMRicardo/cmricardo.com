@@ -9,7 +9,7 @@ interface Props {
   [key: string]: any;
 }
 
-const { src, alt, width, height, ...attrs } = Astro.props;
+const { src, alt, width = 640, height = 360, ...attrs } = Astro.props;
 ---
 
 <Image
