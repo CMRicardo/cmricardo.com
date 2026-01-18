@@ -2,7 +2,7 @@ import { AlertIcon, CancelIcon } from "@hugeicons/core-free-icons"
 import { Icon } from "../Icon"
 import { Button } from "../ui/button"
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer"
-import { ExampleContainer } from "./example-container"
+import { ExampleContainer } from "./ExampleContainer"
 
 export const DrawerDemo = () => {
   return (

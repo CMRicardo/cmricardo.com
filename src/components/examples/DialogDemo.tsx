@@ -2,7 +2,7 @@ import { AlertIcon, CancelIcon } from "@hugeicons/core-free-icons"
 import { Icon } from "@/components/Icon"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { ExampleContainer } from "./example-container"
+import { ExampleContainer } from "./ExampleContainer"
 
 export const DialogDemo = () => {
   return (
