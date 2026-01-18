@@ -83,17 +83,8 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@layer base {
-  * {
-    @apply border-none outline-primary/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 .dark {
-  --background: oklch(0.147 0.004 49.25);
+  --background: oklch(14.69% 0.00412 49.1 / 0.947);
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
@@ -128,7 +119,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-none outline-primary/50;
   }
   body {
     @apply bg-background text-foreground;
