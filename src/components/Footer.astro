@@ -1,25 +1,42 @@
 ---
 import { Image } from "astro:assets";
+import { ModeToggle } from "./ThemeSelector";
+import GithubLogo from "./icons/GithubLogo.astro";
 ---
 
 <footer
-  class="text-primary/80 text-center flex gap-2 items-center justify-center md:py-8 py-4 border-primary/10 border-t border-solid mt-32"
+  class="text-muted-foreground grid gap-4 md:py-8 py-4 border-primary/10 border-t border-solid mt-32"
 >
-  <Image
-    src="/favicon.svg"
-    alt="CMRicardo Avatar"
-    width={32}
-    height={32}
-    loading={"lazy"}
-  />
-
-  <a
-    class="font-bold hover:underline"
-    href="https://github.com/cmricardo"
-    target="_blank"
-    rel="noopener noreferrer"
-    title="Github profile"
-  >
-    Ricardo Corrales
-  </a>
+  <div class="flex justify-end items-center gap-4">
+    <ul>
+      <li>
+        <a
+          class="hover:underline"
+          href="https://github.com/cmricardo"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Github profile"
+        >
+          <GithubLogo width={20} height={20} class="inline mb-1 mr-1" />
+          Github
+        </a>
+      </li>
+    </ul>
+    <ModeToggle />
+  </div>
+  <div class="flex justify-center">
+    <a
+      class="font-bold hover:underline flex items-center gap-2"
+      href="/"
+    >
+      <Image
+        src="/favicon.svg"
+        alt="CMRicardo Avatar"
+        width={32}
+        height={32}
+        loading={"eager"}
+      />
+      Ricardo Corrales
+    </a>
+  </div>
 </footer>
