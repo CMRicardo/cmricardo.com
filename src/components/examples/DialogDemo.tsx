@@ -2,10 +2,11 @@ import { AlertIcon, CancelIcon } from "@hugeicons/core-free-icons"
 import { Icon } from "@/components/Icon"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { ExampleContainer } from "./example-container"
 
 export const DialogDemo = () => {
   return (
-    <div className="grid place-items-center h-32 w-full">
+    <ExampleContainer>
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="destructive" >
@@ -32,6 +33,6 @@ export const DialogDemo = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </ExampleContainer>
   )
 }
