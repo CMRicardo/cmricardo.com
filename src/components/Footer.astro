@@ -1,25 +1,48 @@
 ---
 import { Image } from "astro:assets";
+import { ModeToggle } from "./ThemeSelector";
 ---
 
 <footer
-  class="text-primary/80 text-center flex gap-2 items-center justify-center md:py-8 py-4 border-primary/10 border-t border-solid"
+  class="text-muted-foreground grid gap-4 md:py-8 py-4 border-primary/10 border-t border-solid mt-32"
 >
-  <Image
-    src="/favicon.svg"
-    alt="CMRicardo Avatar"
-    width={32}
-    height={32}
-    loading={"lazy"}
-  />
-
-  <a
-    class="font-bold hover:underline"
-    href="https://github.com/cmricardo"
-    target="_blank"
-    rel="noopener noreferrer"
-    title="Github profile"
-  >
-    Ricardo Corrales
-  </a>
+  <div class="flex justify-between items-center gap-4">
+    <ul class="flex gap-2">
+      <li>
+        <a
+          class="hover:underline"
+          href="https://github.com/cmricardo"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Github profile"
+        >
+        github
+        </a>
+      </li>
+      <li>
+        <a
+          class="hover:underline"
+          href="https://x.com/RichardCM"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="X profile"
+        >
+          twitter
+        </a>
+      </li>
+    </ul>
+    <ModeToggle client:load />
+  </div>
+  <div class="flex justify-center">
+    <a class="font-bold hover:underline flex items-center gap-2" href="/">
+      <Image
+        src="/favicon.svg"
+        alt="CMRicardo Avatar"
+        width={32}
+        height={32}
+        loading={"eager"}
+      />
+      Ricardo Corrales
+    </a>
+  </div>
 </footer>
