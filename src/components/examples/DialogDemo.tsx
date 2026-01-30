@@ -1,5 +1,5 @@
 import { AlertIcon, CancelIcon } from "@hugeicons/core-free-icons";
-import { Icon } from "@/components/Icon.tsx";
+import { Icon } from "@/components/Icon";
 import {
   Dialog,
   DialogClose,
