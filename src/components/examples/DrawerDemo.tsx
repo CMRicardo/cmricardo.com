@@ -11,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { ExampleContainer } from "@/components/examples/ExampleContainer";
+import { ExampleContainer } from "./ExampleContainer";
 
 export const DrawerDemo = () => {
   return (
