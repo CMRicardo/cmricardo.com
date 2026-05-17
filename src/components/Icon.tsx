@@ -11,8 +11,8 @@ export function Icon({
 }: IconProps) {
   return (
     <HugeiconsIcon
-      size={size}
       color={color}
+      size={size}
       strokeWidth={strokeWidth}
       {...rest}
     />

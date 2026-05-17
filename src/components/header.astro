@@ -1,6 +1,6 @@
 ---
 import { WEBSITE_TITLE } from "../constants";
-import NavLink from "./NavLink.astro";
+import NavLink from "./nav-link.astro";
 
 const currentPath = Astro.url.pathname;
 
@@ -13,6 +13,7 @@ const isActive = (path: string): boolean => currentPath === path;
   <a
     href="/"
     class="px-2 py-1 focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded"
+    tabindex={0}
   >
     <h1 class="text-primary font-bold text-xl">{WEBSITE_TITLE}</h1>
   </a>

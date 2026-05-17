@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props
+  extends Omit<HTMLAttributes<"img">, "alt" | "height" | "src" | "width"> {
+  alt: string;
+  height?: number;
+  src: ImageMetadata;
+  width?: number;
+}
+
+const { src, alt, width = 640, height = 360, ...attrs } = Astro.props;
+---
+
+<Image
+  alt={alt}
+  class="my-6 aspect-video max-h-96 w-full rounded-md"
+  height={height}
+  src={src}
+  width={width}
+  {...attrs}
+/>

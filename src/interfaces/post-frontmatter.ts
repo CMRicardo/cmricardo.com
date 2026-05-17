@@ -1,9 +1,9 @@
 export interface PostFrontmatter {
-  title: string;
+  author: string;
+  date: string;
+  imageUrl?: string;
   slug: string;
   summary: string;
-  date: string;
-  author: string;
   tags: string[];
-  imageUrl?: string;
+  title: string;
 }
