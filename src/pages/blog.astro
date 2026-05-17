@@ -1,27 +1,27 @@
 ---
 import type { MarkdownInstance } from "astro";
-import BlogArticle from "@/components/BlogArticle.astro";
+import BlogArticle from "@/components/blog-article.astro";
 import { WEBSITE_TITLE } from "@/constants";
 import "@/styles/global.css";
 import type { PostFrontmatter } from "@/interfaces/post-frontmatter";
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/layout.astro";
 
 const posts = Object.values(
   import.meta.glob<MarkdownInstance<PostFrontmatter>>("@/pages/blog/*.mdx", {
     eager: true,
-  }),
+  })
 );
 
 posts.sort(
   (a, b) =>
     new Date(b.frontmatter.date).getTime() -
-    new Date(a.frontmatter.date).getTime(),
+    new Date(a.frontmatter.date).getTime()
 );
 ---
 
 <Layout title={`Blog | ${WEBSITE_TITLE}`}>
   <section class="grid gap-6">
     <h2 class="text-2xl">Blog</h2>
-    {posts.map((post) => <BlogArticle {post} />)}
+    {posts.map((post) => <BlogArticle key={post.frontmatter.slug} {post} />)}
   </section>
 </Layout>
