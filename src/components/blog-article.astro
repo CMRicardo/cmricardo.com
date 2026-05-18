@@ -1,6 +1,6 @@
 ---
 import type { MarkdownInstance } from "astro";
-import Image from "astro/components/Image.astro";
+import ThemeAwareImage from "@/components/theme-aware-image.astro";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
 
 interface Props {
@@ -8,7 +8,15 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
+const {
+  title,
+  summary,
+  date,
+  author,
+  tags = [],
+  imageUrl,
+  imageUrlDark,
+} = post.frontmatter;
 ---
 
 <article>
@@ -21,12 +29,13 @@ const { title, summary, date, author, tags = [], imageUrl } = post.frontmatter;
     <p>{summary.length > 100 ? `${summary.slice(0, 100)}...` : summary}</p>
     <p class="mt-2 text-sm text-foreground/70">{date} &mdash; {author}</p>
     {imageUrl && (
-      <Image
+      <ThemeAwareImage
         alt={`${title}`}
         class="mt-4 aspect-video max-h-96 rounded-md"
+        darkSrc={imageUrlDark}
         height="394"
+        lightSrc={imageUrl}
         loading={"eager"}
-        src={imageUrl}
         width="700"
       />
     )}

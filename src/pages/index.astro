@@ -1,6 +1,6 @@
 ---
 import type { MarkdownInstance } from "astro";
-import Image from "astro/components/Image.astro";
+import ThemeAwareImage from "@/components/theme-aware-image.astro";
 import type { PostFrontmatter } from "@/interfaces/post-frontmatter";
 import Layout from "@/layouts/layout.astro";
 
@@ -25,15 +25,15 @@ const orderedPosts = posts
   </section>
   <section class="flex flex-col gap-2">
     <h2 class="text-2xl">Latest posts</h2>
-    <ol>
+    <ol class="grid gap-4">
       {orderedPosts.map((post) => (
         <li key={post.frontmatter.slug}>
           <a
-            class="flex flex-col-reverse items-center justify-between gap-2 rounded-md p-4 hover:bg-primary/10 odd:max-sm:bg-primary/10 sm:flex-row"
+            class="grid gap-3 rounded-md p-4 transition-colors hover:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:items-center"
             href={`/blog/${post.frontmatter.slug}`}
             tabindex={0}
           >
-            <section>
+            <section class="min-w-0">
               <h3 class="font-bold">{post.frontmatter.title}</h3>
               <p class="text-primary/80">{post.frontmatter.summary}</p>
               <span class="text-primary/80 text-sm">
@@ -41,11 +41,12 @@ const orderedPosts = posts
               </span>
             </section>
             {post.frontmatter.imageUrl && (
-              <Image
+              <ThemeAwareImage
                 alt={post.frontmatter.title}
-                class="mt-2 aspect-video rounded-md object-cover"
+                class="aspect-video rounded-md"
+                darkSrc={post.frontmatter.imageUrlDark}
                 height="100"
-                src={post.frontmatter.imageUrl}
+                lightSrc={post.frontmatter.imageUrl}
                 width="200"
               />
             )}

@@ -1,5 +1,6 @@
 ---
 import BlogPostHeader from "@/components/blog-post-header.astro";
+import MarkdownContent from "@/components/markdown-content.astro";
 import { WEBSITE_TITLE } from "@/constants";
 import type { PostFrontmatter } from "@/interfaces/post-frontmatter";
 import "@/styles/global.css";
@@ -10,5 +11,5 @@ const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
 
 <Layout title={`${frontmatter.title} | Blog | ${WEBSITE_TITLE}`}>
   <BlogPostHeader {frontmatter} />
-  <main class="[&_p]:my-4 prose prose-invert mx-auto px-4"><slot /></main>
+  <MarkdownContent class="mx-auto px-4"><slot /></MarkdownContent>
 </Layout>

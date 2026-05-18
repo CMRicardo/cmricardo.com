@@ -6,7 +6,11 @@ author: "Ricardo Corrales"
 date: "17 May 2026"
 summary: "AWS console could be overwhelming, especially if we..."
 tags: ['infrastructure', 'devops']
+imageUrl: "/images:sst/light.png"
+imageUrlDark: "/images:sst/dark.png"
 ---
+
+import { GitHubAlert } from '@/components/github-alert';
 
 AWS console could be overwhelming, especially if we only need to deploy or side
 project or quickly see results online.
@@ -80,8 +84,9 @@ export default $config({
 });
 ```
 
-> [!NOTE]
-> We don't have to import sst because it's available globally in the config file.
+<GitHubAlert type="note">
+  We don't have to import sst because it's available globally in the config file.
+</GitHubAlert>
 
 ## Deployment
 
