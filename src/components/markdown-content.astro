@@ -1,0 +1,221 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<main class:list={["markdown-content", className]}><slot /></main>
+
+<script>
+  const copyCodeBlock = async (button: HTMLButtonElement, code: string) => {
+    const originalLabel = button.textContent ?? "Copy";
+
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(code);
+      } else {
+        throw new Error("Clipboard API unavailable");
+      }
+      button.textContent = "Copied";
+      button.dataset.copied = "true";
+    } catch {
+      const textarea = document.createElement("textarea");
+
+      textarea.value = code;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      document.body.append(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, textarea.value.length);
+
+      const didCopy = document.execCommand("copy");
+      textarea.remove();
+
+      button.textContent = didCopy ? "Copied" : "Failed";
+
+      if (didCopy) {
+        button.dataset.copied = "true";
+      }
+    }
+
+    window.setTimeout(() => {
+      button.textContent = originalLabel;
+      delete button.dataset.copied;
+    }, 1600);
+  };
+
+  const enhanceCodeBlocks = () => {
+    for (const block of document.querySelectorAll("pre.astro-code")) {
+      if (block.querySelector(".code-copy-button")) {
+        continue;
+      }
+
+      const code = block.querySelector("code")?.textContent ?? "";
+      const button = document.createElement("button");
+
+      button.className = "code-copy-button";
+      button.type = "button";
+      button.textContent = "Copy";
+      button.setAttribute("aria-label", "Copy code to clipboard");
+      button.addEventListener("click", () => copyCodeBlock(button, code));
+      block.append(button);
+    }
+  };
+
+  enhanceCodeBlocks();
+  document.addEventListener("astro:page-load", enhanceCodeBlocks);
+</script>
+
+<style>
+  .markdown-content {
+    line-height: 1.75;
+  }
+
+  .markdown-content > :global(* + *) {
+    margin-top: 1rem;
+  }
+
+  .markdown-content :global(h2) {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .markdown-content :global(h3) {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .markdown-content :global(a) {
+    font-weight: 600;
+    color: var(--foreground);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    padding-left: 1.5rem;
+    margin-block: 1rem;
+  }
+
+  .markdown-content :global(ul) {
+    list-style: disc;
+  }
+
+  .markdown-content :global(ol) {
+    list-style: decimal;
+  }
+
+  .markdown-content :global(li) {
+    padding-left: 0.25rem;
+  }
+
+  .markdown-content :global(li + li) {
+    margin-top: 0.375rem;
+  }
+
+  .markdown-content :global(li > ul),
+  .markdown-content :global(li > ol) {
+    margin-block: 0.375rem;
+  }
+
+  .markdown-content :global(li::marker) {
+    font-weight: 600;
+    color: var(--muted-foreground);
+  }
+
+  .markdown-content :global(blockquote) {
+    padding: 0.25rem 0 0.25rem 1rem;
+    margin-block: 1.25rem;
+    font-style: italic;
+    color: var(--muted-foreground);
+    border-left: 0.25rem solid var(--border);
+  }
+
+  .markdown-content :global(blockquote > :first-child) {
+    margin-top: 0;
+  }
+
+  .markdown-content :global(blockquote > :last-child) {
+    margin-bottom: 0;
+  }
+
+  .markdown-content :global(.astro-code) {
+    position: relative;
+    overflow-x: auto;
+  }
+
+  .markdown-content :global(.astro-code),
+  .markdown-content :global(.astro-code code) {
+    display: block;
+  }
+
+  .markdown-content :global(.astro-code code) {
+    min-width: max-content;
+    padding: 1rem 3.75rem 1rem 1rem;
+  }
+
+  .markdown-content :global(.code-copy-button) {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--foreground);
+    background-color: color-mix(in oklab, var(--background) 92%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;
+    opacity: 0;
+    transition:
+      background-color 150ms ease,
+      opacity 150ms ease;
+  }
+
+  .markdown-content :global(.astro-code:hover .code-copy-button),
+  .markdown-content :global(.astro-code:focus-within .code-copy-button),
+  .markdown-content :global(.code-copy-button[data-copied="true"]) {
+    opacity: 1;
+  }
+
+  .markdown-content :global(.code-copy-button:hover),
+  .markdown-content :global(.code-copy-button:focus-visible) {
+    background-color: var(--background);
+  }
+
+  .markdown-content :global(.code-copy-button[data-copied="true"]) {
+    color: oklch(0.68 0.17 145);
+  }
+
+  .markdown-content :global(.astro-code span) {
+    background-color: transparent;
+  }
+
+  :global(.dark) .markdown-content :global(.astro-code) {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  :global(.dark) .markdown-content :global(.astro-code span) {
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    color: var(--shiki-dark) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+
+  .markdown-content :global(:not(pre) > code) {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875em;
+    color: var(--accent-foreground);
+    background-color: var(--accent);
+    border-radius: 0.375rem;
+  }
+</style>

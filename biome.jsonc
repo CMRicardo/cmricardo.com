@@ -4,5 +4,8 @@
     "ultracite/biome/core",
     "ultracite/biome/astro",
     "ultracite/biome/react"
-  ]
+  ],
+  "files": {
+    "includes": ["**/src/**"]
+  }
 }

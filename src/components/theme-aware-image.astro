@@ -1,0 +1,75 @@
+---
+interface Props {
+  alt: string;
+  class?: string;
+  darkSrc?: string;
+  height?: number | string;
+  lightSrc: string;
+  loading?: "eager" | "lazy";
+  width?: number | string;
+}
+
+const {
+  alt,
+  class: className = "",
+  darkSrc,
+  height,
+  lightSrc,
+  loading = "lazy",
+  width,
+} = Astro.props;
+---
+
+<span
+  class:list={[
+    "theme-aware-image",
+    darkSrc && "theme-aware-image-has-dark",
+    className,
+  ]}
+>
+  <img
+    alt={alt}
+    class="theme-aware-image-light"
+    height={height}
+    loading={loading}
+    src={lightSrc}
+    width={width}
+  >
+  {darkSrc && (
+      <img
+        alt=""
+        aria-hidden="true"
+        class="theme-aware-image-dark"
+        height={height}
+        loading={loading}
+        src={darkSrc}
+        width={width}
+      />
+    )}
+</span>
+
+<style>
+  .theme-aware-image {
+    display: block;
+    overflow: hidden;
+  }
+
+  .theme-aware-image > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .theme-aware-image > .theme-aware-image-dark {
+    display: none;
+  }
+
+  :global(.dark) .theme-aware-image-has-dark > .theme-aware-image-light {
+    display: none;
+  }
+
+  :global(.dark) .theme-aware-image-has-dark > .theme-aware-image-dark {
+    display: block;
+  }
+</style>

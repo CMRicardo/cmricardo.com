@@ -27,6 +27,7 @@ export default defineConfig({
           dark: "github-dark-dimmed",
         },
       },
+      gfm: true,
     }),
     react(),
   ],

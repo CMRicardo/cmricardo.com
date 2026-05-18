@@ -1,4 +1,5 @@
 ---
+import ThemeAwareImage from "@/components/theme-aware-image.astro";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
 
 const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
@@ -11,4 +12,15 @@ const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
     -
     <span>{frontmatter.author}</span>
   </span>
+  {frontmatter.imageUrl && (
+      <ThemeAwareImage
+        alt={frontmatter.title}
+        class="mt-6 aspect-video rounded-md"
+        darkSrc={frontmatter.imageUrlDark}
+        height="1080"
+        lightSrc={frontmatter.imageUrl}
+        loading="eager"
+        width="1920"
+      />
+    )}
 </header>
