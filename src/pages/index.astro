@@ -27,7 +27,7 @@ const orderedPosts = posts
     <h2 class="text-2xl">Latest posts</h2>
     <ol class="grid gap-4">
       {orderedPosts.map((post) => (
-        <li key={post.frontmatter.slug}>
+        <li>
           <a
             class="grid gap-3 rounded-md p-4 transition-colors hover:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:items-center"
             href={`/blog/${post.frontmatter.slug}`}

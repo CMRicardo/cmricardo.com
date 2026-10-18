@@ -8,6 +8,8 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+  // Keep spaces between inline elements in existing articles after Astro 7.
+  compressHTML: true,
   vite: {
     plugins: [tailwindcss()],
     resolve: {

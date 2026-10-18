@@ -22,6 +22,6 @@ posts.sort(
 <Layout title={`Blog | ${WEBSITE_TITLE}`}>
   <section class="grid gap-6">
     <h2 class="text-2xl">Blog</h2>
-    {posts.map((post) => <BlogArticle key={post.frontmatter.slug} {post} />)}
+    {posts.map((post) => <BlogArticle {post} />)}
   </section>
 </Layout>
