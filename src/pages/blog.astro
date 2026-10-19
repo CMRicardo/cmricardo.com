@@ -19,9 +19,20 @@ posts.sort(
 );
 ---
 
-<Layout title={`Blog | ${WEBSITE_TITLE}`}>
-  <section class="grid gap-6">
-    <h2 class="text-2xl">Blog</h2>
-    {posts.map((post) => <BlogArticle {post} />)}
+<Layout title={`Writing | ${WEBSITE_TITLE}`}>
+  <section class="blog-intro">
+    <span class="eyebrow">Writing / Field notes</span>
+    <h1>Learning out loud.</h1>
+    <p>
+      Notes on building software, thoughtful interfaces,<br>and the things I
+      figure out along the way.
+    </p>
+  </section>
+  <section class="blog-archive" aria-label="All articles">
+    <div class="archive-label">
+      <span>Latest writing</span
+      ><span>{posts.length.toString().padStart(2, '0')} articles</span>
+    </div>
+    {posts.map((post, index) => <BlogArticle {post} {index} />)}
   </section>
 </Layout>

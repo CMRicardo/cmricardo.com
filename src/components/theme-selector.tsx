@@ -1,27 +1,40 @@
 import { LaptopIcon, Moon02Icon, SunIcon } from "@hugeicons/core-free-icons";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  applyTheme,
+  getThemePreference,
+  saveThemePreference,
+} from "@/lib/theme";
 import { cn } from "@/lib/utils";
 import { Icon } from "./icon";
 import { ButtonGroup } from "./ui/button-group";
 
-const themes = ["theme-light", "system", "dark"] as const;
+const themes = ["light", "system", "dark"] as const;
 
 export function ModeToggle() {
   const [theme, setThemeState] = useState<(typeof themes)[number]>("system");
 
   useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains("dark");
-    setThemeState(isDarkMode ? "dark" : "theme-light");
+    setThemeState(getThemePreference());
+    const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const sync = () => {
+      const preference = getThemePreference();
+      setThemeState(preference);
+      applyTheme(preference);
+    };
+    scheme.addEventListener("change", sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      scheme.removeEventListener("change", sync);
+      window.removeEventListener("storage", sync);
+    };
   }, []);
 
-  useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-  }, [theme]);
+  function setTheme(preference: (typeof themes)[number]) {
+    saveThemePreference(preference);
+    setThemeState(preference);
+  }
 
   useEffect(function themeKeyboardShortcut() {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -37,10 +50,10 @@ export function ModeToggle() {
         target?.tagName !== "SELECT" &&
         !target?.isContentEditable
       ) {
-        setThemeState((currentTheme) => {
-          const currentIndex = themes.indexOf(currentTheme);
-          return themes[(currentIndex + 1) % themes.length];
-        });
+        const currentIndex = themes.indexOf(getThemePreference());
+        const next = themes[(currentIndex + 1) % themes.length];
+        saveThemePreference(next);
+        setThemeState(next);
       }
     };
 
@@ -55,9 +68,9 @@ export function ModeToggle() {
     <ButtonGroup>
       <Button
         className={cn(
-          theme === "theme-light" && "bg-primary text-primary-foreground"
+          theme === "light" && "bg-primary text-primary-foreground"
         )}
-        onClick={() => setThemeState("theme-light")}
+        onClick={() => setTheme("light")}
         size={"icon-sm"}
         variant={"ghost"}
       >
@@ -68,16 +81,16 @@ export function ModeToggle() {
         className={cn(
           theme === "system" && "bg-primary text-primary-foreground"
         )}
-        onClick={() => setThemeState("system")}
+        onClick={() => setTheme("system")}
         size={"icon-sm"}
         variant={"ghost"}
       >
-        <span className="sr-only">System theme</span>
+        <span className="sr-only">Same as system</span>
         <Icon icon={LaptopIcon} />
       </Button>
       <Button
         className={cn(theme === "dark" && "bg-primary text-primary-foreground")}
-        onClick={() => setThemeState("dark")}
+        onClick={() => setTheme("dark")}
         size={"icon-sm"}
         variant={"ghost"}
       >

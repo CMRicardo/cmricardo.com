@@ -6,7 +6,7 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<main class:list={["markdown-content", className]}><slot /></main>
+<div class:list={["markdown-content", className]}><slot /></div>
 
 <script>
   const copyCodeBlock = async (button: HTMLButtonElement, code: string) => {

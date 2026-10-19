@@ -2,6 +2,8 @@
 import Analytics from "@vercel/analytics/astro";
 import Header from "@/components/header.astro";
 import "@/styles/global.css";
+import "@/styles/portfolio.css";
+import "@/styles/blog.css";
 import Footer from "@/components/footer.astro";
 import { WEBSITE_TITLE } from "@/constants.ts";
 
@@ -12,44 +14,35 @@ interface Props {
 const { title = WEBSITE_TITLE, className = "" } = Astro.props;
 ---
 
-<script is:inline>
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-  if (typeof localStorage !== "undefined") {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  }
-</script>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <script is:inline>
+      (() => {
+        let preference = "system";
+        try {
+          preference = localStorage.getItem("theme") ?? "system";
+        } catch {
+          // Storage can be unavailable; follow the system theme.
+        }
+        document.documentElement.classList.toggle(
+          "dark",
+          preference === "dark" ||
+            (preference !== "light" &&
+              matchMedia("(prefers-color-scheme: dark)").matches)
+        );
+      })();
+    </script>
     <meta name="viewport" content="width=device-width">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="generator" content={Astro.generator}>
     <title>{title}</title>
     <Analytics />
   </head>
-  <body class="min-h-screen">
-    <div class="max-w-3xl mx-auto px-4 flex flex-col min-h-screen">
-      <Header />
-      <main class={`mt-10 flex-1 ${className}`}><slot /></main>
-      <Footer />
-    </div>
+  <body class="blog-site">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main" class={`blog-main ${className}`}><slot /></main>
+    <Footer />
   </body>
 </html>

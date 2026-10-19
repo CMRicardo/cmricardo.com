@@ -1,26 +1,18 @@
 ---
-import ThemeAwareImage from "@/components/theme-aware-image.astro";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
+import ThemeAwareImage from "./theme-aware-image.astro";
 
 const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
 ---
 
-<header>
-  <h2 class="text-2xl font-bold tracking-tight">{frontmatter.title}</h2>
-  <span class="text-sm text-foreground/70">
-    <span>{frontmatter.date}</span>
-    -
-    <span>{frontmatter.author}</span>
-  </span>
-  {frontmatter.imageUrl && (
-      <ThemeAwareImage
-        alt={frontmatter.title}
-        class="mt-6 aspect-video rounded-md"
-        darkSrc={frontmatter.imageUrlDark}
-        height="1080"
-        lightSrc={frontmatter.imageUrl}
-        loading="eager"
-        width="1920"
-      />
-    )}
+<header class="article-header">
+  <a class="back-to-writing" href="/blog">← All writing</a>
+  <div class="entry-meta">
+    <time datetime={new Date(frontmatter.date).toISOString()}
+      >{frontmatter.date}</time
+    ><span>{frontmatter.tags?.join(' / ')}</span>
+  </div>
+  <h1>{frontmatter.title}</h1>
+  <p class="article-author">By {frontmatter.author}</p>
+  {frontmatter.imageUrl && <ThemeAwareImage alt={frontmatter.title} class="article-cover" darkSrc={frontmatter.imageUrlDark} height="675" lightSrc={frontmatter.imageUrl} loading="eager" width="1200" />}
 </header>

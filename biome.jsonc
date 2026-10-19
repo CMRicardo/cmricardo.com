@@ -5,6 +5,12 @@
     "ultracite/biome/astro",
     "ultracite/biome/react"
   ],
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": { "rules": { "correctness": { "useJsxKeyInIterable": "off" } } }
+    }
+  ],
   "files": {
     "includes": ["**/src/**"]
   }

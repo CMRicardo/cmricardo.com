@@ -1,0 +1,210 @@
+---
+import "@fontsource-variable/inter/index.css";
+import "../../styles/portfolio.css";
+import Footer from "../footer.astro";
+import Header from "../header.astro";
+
+const posts = Object.values(
+  import.meta.glob<{
+    frontmatter: { title: string; slug: string; date: string };
+  }>("../../pages/blog/*.mdx", { eager: true })
+).sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).getTime() -
+    new Date(a.frontmatter.date).getTime()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Ricardo Corrales — building software at Grupo Comidas. Work, experiments, and notes on building for the web."
+    >
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <title>Ricardo Corrales — Portfolio & writing</title>
+    <script is:inline>
+      (() => {
+        let preference = "system";
+        try {
+          preference = localStorage.getItem("theme") ?? "system";
+        } catch {
+          // Storage can be unavailable; follow the system theme.
+        }
+        const dark =
+          preference === "dark" ||
+          (preference !== "light" &&
+            matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="scene" aria-hidden="true">
+          <div class="type-sculpture">
+            {Array.from({length: 22}, (_, i) => <span class:list={['type-layer', { 'type-front': i === 21 }]} style={`--layer:${i}`}>cmricardo</span>)}
+          </div>
+        </div>
+        <h1 id="hero-title" class="sr-only">
+          cmricardo — Ricardo Corrales, software developer
+        </h1>
+        <section class="hero-bottom" aria-label="Introduction">
+          <h2>Thoughtful software.<br>Solid foundations.</h2>
+          <div class="hero-note">
+            <p>
+              I’m Ricardo. I build for the web,<br>and write about what I learn
+              along the way.
+            </p>
+            <a href="#work" class="text-link">Explore my work <span>↘</span></a>
+          </div>
+        </section>
+      </section>
+      <section class="work section-shell" id="work">
+        <div class="section-heading">
+          <span class="eyebrow">01 / Projects</span>
+          <h2>A few things I’m building.</h2>
+          <p>Personal projects, from an idea<br>to something you can use.</p>
+        </div>
+        <div class="work-grid">
+          <article class="work-card">
+            <div class="project-art peras-art">
+              <div class="peras-brand">
+                <img
+                  class="peras-icon"
+                  src="/projects/peras-light.png"
+                  width="80"
+                  height="80"
+                  alt="Peras crystal pear icon"
+                  loading="lazy"
+                >
+                <span>Peras</span>
+                <p>A little clarity for your money.</p>
+              </div>
+              <div
+                class="budget-preview"
+                aria-label="Illustrative Peras budget preview"
+              >
+                <div class="preview-top">
+                  <span>Monthly budget</span><span>HNL</span>
+                </div>
+                <div class="budget-total">
+                  L 12,450<span>left to spend</span>
+                </div>
+                <div class="budget-track">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="budget-legend">
+                  <span>● Essentials</span><span>● Everyday</span
+                  ><span>● Savings</span>
+                </div>
+              </div>
+              <span class="preview-label">Illustrative preview</span>
+            </div>
+            <div class="project-meta">
+              <span>iOS & macOS</span
+              ><span class="project-status"><i></i>In development</span>
+            </div>
+            <h3>Peras</h3>
+            <p class="project-description">
+              A native budgeting app for keeping expenses, wallets, and spending
+              limits in one place.
+            </p>
+            <a
+              class="text-link"
+              href="https://github.com/CMRicardo/Peras"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Explore the project ↗</a
+            >
+          </article>
+          <article class="work-card">
+            <div class="project-art benefits-art" lang="es">
+              <div class="benefits-preview">
+                <div class="preview-top">
+                  <span>HN / Prestaciones</span><span>↗</span>
+                </div>
+                <h4>Tu trabajo.<br>Tus derechos.</h4>
+                <div class="calculator-field">
+                  <span>Salario mensual</span><span>L —</span>
+                </div>
+                <div class="calculator-dates">
+                  <div><span>Fecha de ingreso</span><b>dd / mm / aaaa</b></div>
+                  <div><span>Fecha de salida</span><b>dd / mm / aaaa</b></div>
+                </div>
+                <div class="calculator-placeholder">
+                  Un punto de partida para entender tus prestaciones.
+                </div>
+              </div>
+              <span class="preview-label"
+                >Interface concept · not a working calculator</span
+              >
+            </div>
+            <div class="project-meta">
+              <span>Web app · Honduras</span
+              ><span class="project-status planned"><i></i>Planned</span>
+            </div>
+            <h3>Prestaciones laborales</h3>
+            <p class="project-description">
+              A future web app to help people in Honduras estimate and
+              understand their labor benefits.
+            </p>
+            <span class="coming-soon">Coming next <span>↗</span></span>
+          </article>
+        </div>
+        <div class="current">
+          <span class="status-dot"></span>
+          <p>Currently building software at <strong>Grupo Comidas</strong>.</p>
+        </div>
+      </section>
+      <section class="writing section-shell" id="writing">
+        <div class="section-heading">
+          <span class="eyebrow">02 / Field notes</span>
+          <h2>Learning out loud.</h2>
+          <a href="/blog" class="text-link">All writing ↗</a>
+        </div>
+        <div class="post-list">
+          {posts.map((post, i) => <a class="post-row" href={`/blog/${post.frontmatter.slug}`}><span class="post-number">0{i + 1}</span><h3>{post.frontmatter.title}</h3><time>{post.frontmatter.date}</time><span>↗</span></a>)}
+        </div>
+      </section>
+      <Footer />
+    </main>
+    <script>
+      const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let pending = false;
+      function render() {
+        pending = false;
+        const progress = Math.min(
+          Math.max(window.scrollY / window.innerHeight, 0),
+          1
+        );
+        document.body.style.setProperty(
+          "--parallax-y",
+          motion.matches
+            ? "0px"
+            : `${Math.min(window.scrollY, window.innerHeight) * 0.55}px`
+        );
+        document.body.style.setProperty(
+          "--hero-opacity",
+          motion.matches ? "1" : String(Math.max(0, 1 - progress / 0.8))
+        );
+      }
+      function requestRender() {
+        if (!pending) {
+          pending = true;
+          requestAnimationFrame(render);
+        }
+      }
+      window.addEventListener("scroll", requestRender, { passive: true });
+      window.addEventListener("resize", requestRender, { passive: true });
+      motion.addEventListener("change", requestRender);
+      render();
+    </script>
+  </body>
+</html>

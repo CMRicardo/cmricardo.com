@@ -1,27 +1,19 @@
 ---
-import { WEBSITE_TITLE } from "../constants";
-import NavLink from "./nav-link.astro";
+import ThemeCycle from "./theme-cycle.astro";
 
-const currentPath = Astro.url.pathname;
-
-const isActive = (path: string): boolean => currentPath === path;
+const writing = Astro.url.pathname.startsWith("/blog");
 ---
 
-<header
-  class="flex items-center rounded-md justify-between gap-2 py-4 md:mt-32 mt-16 sticky top-0 bg-background z-10 px-4"
->
-  <a
-    href="/"
-    class="px-2 py-1 focus-visible:outline-1 focus-visible:bg-gray-100/10 rounded"
-    tabindex={0}
+<header class="site-header">
+  <a class="identity" href="/" aria-label="Ricardo Corrales home"
+    ><span class="brand-mark">rc.</span><span>Ricardo<br>Corrales</span></a
   >
-    <h1 class="text-primary font-bold text-xl">{WEBSITE_TITLE}</h1>
-  </a>
-  <nav>
-    <ul class="flex">
-      <li>
-        <NavLink href="/blog" label="Blog" isActive={isActive("/blog")} />
-      </li>
-    </ul>
+  <nav aria-label="Main navigation">
+    <a href="/#work">Work <span>01</span></a>
+    <a href="/blog" aria-current={writing ? 'page' : undefined}
+      >Writing <span>02</span></a
+    >
+    <a href="https://github.com/cmricardo">GitHub ↗</a>
+    <ThemeCycle />
   </nav>
 </header>

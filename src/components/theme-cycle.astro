@@ -1,0 +1,72 @@
+<button
+  class="theme-cycle"
+  type="button"
+  data-theme="system"
+  aria-label="Theme: Auto. Switch to Light"
+>
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    aria-hidden="true"
+  >
+    <g data-icon="system">
+      <rect x="3" y="4" width="18" height="13" rx="2" />
+      <path d="M8 21h8m-4-4v4" />
+    </g>
+    <g data-icon="light">
+      <circle cx="12" cy="12" r="4" />
+      <path
+        d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+      />
+    </g>
+    <g data-icon="dark">
+      <path d="M20.7 13A9 9 0 0 1 11 3.3 9 9 0 1 0 20.7 13Z" />
+    </g>
+  </svg>
+</button>
+<script>
+  import {
+    applyTheme,
+    getThemePreference,
+    saveThemePreference,
+    type ThemePreference,
+  } from "../lib/theme";
+
+  const toggle = document.querySelector<HTMLButtonElement>(".theme-cycle");
+  const modes: ThemePreference[] = ["system", "light", "dark"];
+  const labels = { system: "Auto", light: "Light", dark: "Dark" };
+  const nextMode = () => modes[(modes.indexOf(preference) + 1) % modes.length];
+  const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+  let preference = getThemePreference();
+  function syncTheme() {
+    applyTheme(preference);
+    if (toggle) {
+      toggle.dataset.theme = preference;
+      const description = `Theme: ${labels[preference]}. Switch to ${labels[nextMode()]}`;
+      toggle.setAttribute("aria-label", description);
+      toggle.title = description;
+    }
+    const dark = document.documentElement.classList.contains("dark");
+    const icon = document.querySelector<HTMLImageElement>(".peras-icon");
+    if (icon) {
+      icon.src = `/projects/peras-${dark ? "dark" : "light"}.png`;
+    }
+  }
+  toggle?.addEventListener("click", () => {
+    preference = nextMode();
+    saveThemePreference(preference);
+    syncTheme();
+  });
+  scheme.addEventListener("change", syncTheme);
+  window.addEventListener("storage", (event) => {
+    if (event.key === "theme" || event.key === null) {
+      preference = getThemePreference();
+      syncTheme();
+    }
+  });
+  syncTheme();
+</script>

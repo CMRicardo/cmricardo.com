@@ -1,48 +1,11 @@
----
-import { Image } from "astro:assets";
-import { ModeToggle } from "./theme-selector";
----
-
-<footer
-  class="text-muted-foreground grid gap-4 md:py-8 py-4 border-primary/10 border-t border-solid mt-32"
->
-  <div class="flex justify-between items-center gap-4">
-    <ul class="flex gap-2">
-      <li>
-        <a
-          class="hover:underline"
-          href="https://github.com/cmricardo"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Github profile"
-        >
-          github
-        </a>
-      </li>
-      <li>
-        <a
-          class="hover:underline"
-          href="https://x.com/RichardCM"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="X profile"
-        >
-          twitter
-        </a>
-      </li>
-    </ul>
-    <ModeToggle client:load />
-  </div>
-  <div class="flex justify-center">
-    <a class="font-bold hover:underline flex items-center gap-2" href="/">
-      <Image
-        src="/favicon.svg"
-        alt="CMRicardo Avatar"
-        width={32}
-        height={32}
-        loading={"eager"}
-      />
-      Ricardo Corrales
-    </a>
+<footer class="section-shell">
+  <span class="eyebrow">Have something in mind?</span
+  ><a class="footer-title" href="https://github.com/cmricardo"
+    >Let’s build something. ↗</a
+  >
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Ricardo Corrales</span
+    ><a href="https://x.com/RichardCM">Find me on X ↗</a
+    ><a href="#main">Back to top ↑</a>
   </div>
 </footer>

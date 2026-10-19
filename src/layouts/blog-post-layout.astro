@@ -9,7 +9,15 @@ import Layout from "@/layouts/layout.astro";
 const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
 ---
 
-<Layout title={`${frontmatter.title} | Blog | ${WEBSITE_TITLE}`}>
-  <BlogPostHeader {frontmatter} />
-  <MarkdownContent class="mx-auto px-4"><slot /></MarkdownContent>
+<Layout
+  className="article-page"
+  title={`${frontmatter.title} | Blog | ${WEBSITE_TITLE}`}
+>
+  <article>
+    <BlogPostHeader {frontmatter} />
+    <MarkdownContent><slot /></MarkdownContent>
+    <div class="article-end">
+      <span>Thanks for reading.</span><a href="/blog">More writing ↗</a>
+    </div>
+  </article>
 </Layout>
