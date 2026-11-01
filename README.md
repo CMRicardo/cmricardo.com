@@ -30,6 +30,8 @@ To learn more about the folder structure of an Astro project, refer to [our guid
 
 ## 🧞 Commands
 
+Use Node.js 26 (for example, run `nvm use` if you use nvm).
+
 All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
