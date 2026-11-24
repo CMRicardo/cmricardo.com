@@ -26,7 +26,7 @@ const orderedPosts = posts
   <section class="flex flex-col gap-2">
     <h2 class="text-2xl">Latest posts</h2>
     <ol class="grid gap-4">
-      {orderedPosts.map((post) => (
+      {orderedPosts.map((post, index) => (
         <li key={post.frontmatter.slug}>
           <a
             class="grid gap-3 rounded-md p-4 transition-colors hover:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:items-center"
@@ -45,9 +45,9 @@ const orderedPosts = posts
                 alt={post.frontmatter.title}
                 class="aspect-video rounded-md"
                 darkSrc={post.frontmatter.imageUrlDark}
-                height="100"
                 lightSrc={post.frontmatter.imageUrl}
-                width="200"
+                loading={index < 2 ? "eager" : "lazy"}
+                width={200}
               />
             )}
           </a>
