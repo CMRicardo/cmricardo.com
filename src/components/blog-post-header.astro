@@ -17,10 +17,9 @@ const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter };
         alt={frontmatter.title}
         class="mt-6 aspect-video rounded-md"
         darkSrc={frontmatter.imageUrlDark}
-        height="1080"
         lightSrc={frontmatter.imageUrl}
         loading="eager"
-        width="1920"
+        width={1920}
       />
     )}
 </header>

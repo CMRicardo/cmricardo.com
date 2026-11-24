@@ -4,10 +4,11 @@ import ThemeAwareImage from "@/components/theme-aware-image.astro";
 import type { PostFrontmatter } from "../interfaces/post-frontmatter";
 
 interface Props {
+  loading?: "eager" | "lazy";
   post: MarkdownInstance<PostFrontmatter>;
 }
 
-const { post } = Astro.props;
+const { loading, post } = Astro.props;
 const {
   title,
   summary,
@@ -33,10 +34,9 @@ const {
         alt={`${title}`}
         class="mt-4 aspect-video max-h-96 rounded-md"
         darkSrc={imageUrlDark}
-        height="394"
         lightSrc={imageUrl}
-        loading={"eager"}
-        width="700"
+        loading={loading}
+        width={700}
       />
     )}
     {tags && tags.length > 0 && (
